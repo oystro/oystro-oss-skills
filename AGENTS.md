@@ -45,6 +45,6 @@ pushed**, so the local hooks are the real prevention. In every clone, before any
 - Ensure hooks are installed: `git config core.hooksPath` must be `githooks`. If it is not, run
   `./scripts/setup-hooks.sh` (or `git config core.hooksPath githooks`).
 - **NEVER** pass `--no-verify` to `git commit` or `git push`.
-- `gitleaks` must be installed (`brew install gitleaks`); do not bypass if it is missing.
+- `gitleaks` must be installed via your platform's package manager — macOS: `brew install gitleaks`; Windows: `winget install Gitleaks.Gitleaks`; Linux: `apt`/`dnf`/`pacman` or the release binary. Do not bypass if it is missing.
 - Before finishing, scan the working tree, including gitignored files:
   `./scripts/scan-secrets.sh`.

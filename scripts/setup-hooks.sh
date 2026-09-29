@@ -23,5 +23,5 @@ echo "   pre-push   : scans the commits being pushed (fail-closed)"
 if ! command -v gitleaks >/dev/null 2>&1; then
   echo "⚠️  gitleaks is NOT installed."
   echo "    pre-commit scanning will be skipped, and pre-push will FAIL CLOSED"
-  echo "    (pushes blocked) until you install it:  brew install gitleaks"
+  echo "    (pushes blocked) until you install gitleaks for your OS (brew/winget/apt/dnf/pacman)."
 fi

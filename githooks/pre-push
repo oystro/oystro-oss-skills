@@ -11,7 +11,7 @@ export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
 
 if ! command -v gitleaks >/dev/null 2>&1; then
   echo "❌ [PRE-PUSH] gitleaks not found — push blocked." >&2
-  echo "   Install it (brew install gitleaks) then retry." >&2
+  echo "   Install it for your OS (brew/winget/apt/dnf/pacman) then retry." >&2
   exit 1
 fi
 
