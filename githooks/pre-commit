@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Hooks run with a minimal PATH; include common install locations.
+export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+
+# ==============================================================================
+# Oystro Pre-Commit Hook: Sensitive File & Secret Detection
+# Configure per clone: git config core.hooksPath githooks
+# ==============================================================================
+
+FORBIDDEN_PATTERNS=(
+  '\.tfstate(\..*)?$'
+  'terraform\.tfvars$'
+  'terraform\.tfvars\.json$'
+  '\.env(\..+)?$'
+  'id_rsa.*'
+  '.*\.pem$'
+  '.*\.key$'
+)
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+
+blocked=0
+for file in $staged_files; do
+  # Allow safe example files
+  if [[ "$file" =~ \.example$ ]] || [[ "$file" =~ \.sample$ ]]; then
+    continue
+  fi
+
+  for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
+    if echo "$file" | grep -Eq "$pattern"; then
+      echo "❌ [PRE-COMMIT] Blocked sensitive file from commit: $file" >&2
+      blocked=1
+    fi
+  done
+done
+
+if [ "$blocked" -ne 0 ]; then
+  echo "❌ [PRE-COMMIT] Commit aborted. Sensitive files or credentials must never be committed." >&2
+  exit 1
+fi
+
+# Gitleaks scan on staged content (if installed)
+if command -v gitleaks >/dev/null 2>&1; then
+  echo "==> Running gitleaks on staged changes..."
+  if ! gitleaks protect --staged --verbose; then
+    echo "❌ [PRE-COMMIT] Gitleaks detected potential secret in staged files." >&2
+    exit 1
+  fi
+fi
+
+exit 0

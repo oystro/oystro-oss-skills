@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-28",
+  "sources": [
+    {
+      "id": "agent-skills-spec",
+      "url": "https://github.com/agentskills/agentskills",
+      "type": "standard",
+      "publisher": "Agent Skills project",
+      "trust": "publisher",
+      "status": "approved-source",
+      "scope": "SKILL.md specification and reference validator"
+    },
+    {
+      "id": "anthropic-skills",
+      "url": "https://github.com/anthropics/skills",
+      "type": "skill-repository",
+      "publisher": "Anthropic",
+      "trust": "publisher",
+      "status": "source-only",
+      "scope": "General skills and skill creation/evaluation examples"
+    },
+    {
+      "id": "openai-skills",
+      "url": "https://github.com/openai/skills",
+      "type": "skill-repository",
+      "publisher": "OpenAI",
+      "trust": "publisher",
+      "status": "source-only",
+      "scope": "Curated and experimental Codex skills"
+    },
+    {
+      "id": "google-gemini-skills",
+      "url": "https://github.com/google-gemini/gemini-skills",
+      "type": "skill-repository",
+      "publisher": "Google Gemini organization",
+      "trust": "publisher",
+      "status": "source-only",
+      "scope": "Gemini API and SDK skills; repository is not an officially supported Google product"
+    },
+    {
+      "id": "microsoft-azure-skills",
+      "url": "https://github.com/microsoft/azure-skills",
+      "type": "skill-repository",
+      "publisher": "Microsoft",
+      "trust": "publisher",
+      "status": "source-only",
+      "scope": "Azure architecture, validation, deployment, and operations"
+    },
+    {
+      "id": "vercel-agent-skills",
+      "url": "https://github.com/vercel-labs/agent-skills",
+      "type": "skill-repository",
+      "publisher": "Vercel Labs",
+      "trust": "publisher",
+      "status": "source-only",
+      "scope": "Web development and Vercel platform skills"
+    },
+    {
+      "id": "huggingface-skills",
+      "url": "https://github.com/huggingface/skills",
+      "type": "skill-repository",
+      "publisher": "Hugging Face",
+      "trust": "publisher",
+      "status": "source-only",
+      "scope": "Hugging Face Hub, model, dataset, and compute workflows"
+    },
+    {
+      "id": "context-hub",
+      "url": "https://github.com/andrewyng/context-hub",
+      "type": "documentation-provider",
+      "publisher": "Andrew Ng / AI Suite",
+      "trust": "publisher",
+      "status": "approved-source",
+      "scope": "Versioned API documentation; annotations are untrusted and off by default"
+    },
+    {
+      "id": "skills-sh",
+      "url": "https://www.skills.sh/",
+      "type": "discovery-catalog",
+      "publisher": "Vercel",
+      "trust": "candidate",
+      "status": "discovery-only",
+      "scope": "Public skill discovery; each selected skill requires independent review"
+    },
+    {
+      "id": "skilltap",
+      "url": "https://skilltap.dev/",
+      "type": "installer-reference",
+      "publisher": "skilltap project",
+      "trust": "candidate",
+      "status": "reference-only",
+      "scope": "Git-backed registries, lockfiles, update diffs, provenance, and scanning patterns"
+    }
+  ]
+}

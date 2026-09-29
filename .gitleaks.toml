@@ -1,0 +1,17 @@
+# Gitleaks configuration for Oystro repositories
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Global allowlist for intentional placeholders, examples, and test data"
+paths = [
+  '''(?i)terraform\.tfvars\.example$''',
+  '''(?i)\.example$'''
+]
+regexes = [
+  '''xkeysib-your-brevo-api-key''',
+  '''xkeysib-([a-zA-Z0-9]{4})\.\.\.''',
+  '''AUTH-[X]{6}''',
+  '''STAGING_BASIC_PASS_HASH''',
+  '''e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855''',
+]

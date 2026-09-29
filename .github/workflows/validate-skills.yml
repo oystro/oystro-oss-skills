@@ -1,0 +1,37 @@
+name: Validate Agent Skills
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install skills-ref (pinned)
+        # Note: skills-ref==0.1.1 package provides console script entrypoint 'agentskills'.
+        # We invoke 'agentskills validate' directly and alias 'skills-ref' for spec conformity.
+        run: |
+          pip install skills-ref==0.1.1
+          which skills-ref || ln -s "$(which agentskills)" "$(dirname "$(which agentskills)")/skills-ref"
+
+      - name: Validate skills against Agent Skills specification
+        run: |
+          failed=0
+          for skill_dir in skills/*; do
+            [ -d "$skill_dir" ] || continue
+            echo "Validating $skill_dir..."
+            agentskills validate "$skill_dir" || failed=1
+          done
+          [ $failed -eq 0 ] || { echo "::error::skill validation failed"; exit 1; }
+          echo "All skills passed validation successfully."

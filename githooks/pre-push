@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ==============================================================================
+# Oystro Pre-Push Hook: block pushes that would leak secrets.
+# Fail-closed: a missing scanner blocks the push, it does not permit it.
+# ==============================================================================
+
+# Hooks run with a minimal PATH; include common install locations.
+export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "❌ [PRE-PUSH] gitleaks not found — push blocked." >&2
+  echo "   Install it (brew install gitleaks) then retry." >&2
+  exit 1
+fi
+
+echo "==> [PRE-PUSH] gitleaks audit on commits being pushed..."
+fail=0
+while read -r _local_ref local_sha _remote_ref remote_sha; do
+  # Branch deletion — nothing to scan.
+  if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+    continue
+  fi
+
+  if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+    # New branch: no remote counterpart — scan the full reachable history.
+    logopts="--all"
+  else
+    # Existing branch: scan only the commits being added.
+    logopts="$remote_sha..$local_sha"
+  fi
+
+  if ! gitleaks git --log-opts="$logopts" --redact --verbose; then
+    echo "❌ [PRE-PUSH] Secrets found in commit range '$logopts'. Push aborted." >&2
+    fail=1
+  fi
+done
+
+[ "$fail" -eq 0 ] || exit 1
+echo "✅ [PRE-PUSH] No leaks found."
+exit 0
