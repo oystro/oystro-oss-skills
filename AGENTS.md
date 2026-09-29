@@ -36,3 +36,15 @@ This repository owns runner-neutral maintained skills and a curated discovery re
 - Skills are selected and installed conditionally based on detected stack and task needs; never install or bundle the entire registry.
 - Do not add runtime adapters, installation workflows, agent personas, or named consumer bundles here.
 - Do not duplicate harness policy from consuming projects.
+
+## Local secret-scan hooks (agents MUST enforce)
+
+Secrets must never leave the machine. CI secret scanning only detects a leak **after it is already
+pushed**, so the local hooks are the real prevention. In every clone, before any git work:
+
+- Ensure hooks are installed: `git config core.hooksPath` must be `githooks`. If it is not, run
+  `./scripts/setup-hooks.sh` (or `git config core.hooksPath githooks`).
+- **NEVER** pass `--no-verify` to `git commit` or `git push`.
+- `gitleaks` must be installed via your platform's package manager — macOS: `brew install gitleaks`; Windows: `winget install Gitleaks.Gitleaks`; Linux: `apt`/`dnf`/`pacman` or the release binary. Do not bypass if it is missing.
+- Before finishing, scan the working tree, including gitignored files:
+  `./scripts/scan-secrets.sh`.
