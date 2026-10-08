@@ -1,0 +1,7 @@
+# Shell scripts and git hooks MUST use LF: they run under bash on Windows too
+# (Git for Windows ships bash), and a CRLF shebang breaks the interpreter.
+*.sh   text eol=lf
+githooks/* text eol=lf
+
+# PowerShell scripts keep CRLF.
+*.ps1  text eol=crlf
