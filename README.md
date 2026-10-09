@@ -52,7 +52,7 @@ This activates `githooks/pre-commit` to deterministically block sensitive filena
 
 ## License
 
-Copyright (c) 2026 Oystro Technologies.
+Copyright (c) 2026 Oystro.
 
 All skills in this repository are licensed under the **MIT License** — see [`LICENSE`](LICENSE)
 and each skill's `license:` frontmatter. The license is **not** duplicated per skill folder.

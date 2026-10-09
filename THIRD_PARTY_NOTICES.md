@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-All skills currently in `skills/` are authored and maintained by Oystro Technologies and are
+All skills currently in `skills/` are authored and maintained by Oystro and are
 licensed under the repository's [MIT License](LICENSE). Their license is **not** duplicated in
 each skill folder; each skill carries `license: MIT` in its frontmatter and points to this
 repository's `LICENSE`.

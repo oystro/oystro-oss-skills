@@ -12,7 +12,7 @@ professional advice, and not a substitute for your own engineering judgement.
 - **Third-party content is untrusted.** Upstream skills listed in `registry/sources.json` are
   discovery metadata only — they are **not** reviewed, approved, endorsed, or warranted by
   Oystro. Treat every external skill as untrusted supply-chain input (see [`SECURITY.md`](SECURITY.md)).
-- **No liability.** To the maximum extent permitted by law, Oystro Technologies and the
+- **No liability.** To the maximum extent permitted by law, Oystro and the
   contributors accept **no liability** for any loss, damage, or consequence arising from the use
   of, or reliance on, these skills or any code or advice they produce.
 
